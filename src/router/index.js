@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Lights from '../views/Lights.vue'
+import Groups from '../views/Groups.vue'
 
 Vue.use(VueRouter)
 
@@ -15,6 +16,11 @@ Vue.use(VueRouter)
     path: '/lights',
     name: 'Lights',
     component: Lights
+  },
+  {
+    path: '/groups',
+    name: 'Groups',
+    component: Groups
   },
   {
     path: '/about',
