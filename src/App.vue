@@ -72,18 +72,28 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-btn color="primary" class='ma-3' dark x-large fixed bottom right fab>
+    <v-btn color="primary" class='ma-3' dark x-large fixed bottom right fab @click="switchLight()">
       <v-icon>mdi-home-lightbulb</v-icon>
     </v-btn>
   </v-app>
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: "App",
 
   components: {},
 
-  data: () => ({})
+  data: () => ({}),
+  
+  methods: {
+    switchLight: function() {
+      axios.put('http://192.168.1.131/api/gSXQFL0s7EWCVmKzlVzt1gJee7J-MnbuqjV9BO6L/lights/2/state', {
+        on: false
+      })
+    }
+  }
 };
 </script>
