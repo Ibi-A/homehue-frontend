@@ -1,6 +1,7 @@
 <template>
-    <v-container v-if="ready">
-        <v-row>
+    <v-container>
+        <h1 class="display-4">Lumières</h1>
+        <v-row v-if="ready" class="py-12">
             <LightCard v-for="lightId in lightIds" :key="lightId" :light-id="lightId"/>
         </v-row>
     </v-container>

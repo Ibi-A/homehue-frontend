@@ -1,20 +1,14 @@
 <template>
   <v-app>
-    <v-app-bar app color="primary" dark>
-      <v-toolbar-title>
-        <strong>Homehue</strong>
-      </v-toolbar-title>
-    </v-app-bar>
-
     <v-content>
-      <router-view class='pa-6'/>
+      <router-view class='pa-12'/>
     </v-content>
 
-    <v-navigation-drawer app absolute>
+    <v-navigation-drawer app absolute class="deep-purple accent-4" dark>
       <v-list dense nav class="py-0">
         <v-list-item>
           <v-list-item-content>
-            <v-list-item-title>Outils</v-list-item-title>
+            <v-list-item-title>HomeHue</v-list-item-title>
             <v-list-item-subtitle>Menu principal</v-list-item-subtitle>
             <v-divider></v-divider>
           </v-list-item-content>
@@ -84,7 +78,9 @@ export default {
 
   components: {},
 
-  data: () => ({}),
+  data: () => ({
+    
+  }),
 
   methods: {
     switchLight: function() {

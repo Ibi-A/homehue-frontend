@@ -1,6 +1,6 @@
 <template>
   <v-col cols="12" xs="12" sm="12" md="6" lg="4" xl="3">
-    <v-card v-if="ready">
+    <v-card v-if="ready" raised>
       <v-card-title>{{ lightName }}</v-card-title>
       <v-card-actions>
         <v-switch v-model="isLightOn"></v-switch>
