@@ -1,6 +1,8 @@
 <template>
     <v-container v-if="ready">
-        <LightCard v-for="lightId in lightIds" :key="lightId" :light-id="lightId"/>
+        <v-row>
+            <LightCard v-for="lightId in lightIds" :key="lightId" :light-id="lightId"/>
+        </v-row>
     </v-container>
 </template>
 
