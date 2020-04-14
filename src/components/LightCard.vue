@@ -3,7 +3,7 @@
     <v-card v-if="ready">
       <v-card-title>{{ lightName }}</v-card-title>
       <v-card-actions>
-        <v-switch v-model="isLightOn" @></v-switch>
+        <v-switch v-model="isLightOn"></v-switch>
       </v-card-actions>
 
       <v-snackbar
