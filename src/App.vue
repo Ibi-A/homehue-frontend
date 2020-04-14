@@ -79,20 +79,16 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 export default {
   name: "App",
 
   components: {},
 
   data: () => ({}),
-  
+
   methods: {
     switchLight: function() {
-      axios.put('http://192.168.1.131/api/gSXQFL0s7EWCVmKzlVzt1gJee7J-MnbuqjV9BO6L/lights/2/state', {
-        on: false
-      })
+      
     }
   }
 };
