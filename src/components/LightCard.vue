@@ -3,7 +3,8 @@
     <v-card v-if="ready" raised>
       <v-card-title>{{ lightName }}</v-card-title>
       <v-card-actions>
-        <v-switch v-model="isLightOn"></v-switch>
+        <v-slider v-model="brightness" min="1" max="254" :disabled="!isLightOn"/>
+        <v-switch v-model="isLightOn" />
       </v-card-actions>
 
       <v-snackbar
@@ -28,13 +29,17 @@ export default {
       ready: false,
       snackbar: false,
       lightName: String,
-      isLightOn: Boolean
+      isLightOn: Boolean,
+      brightness: Number
     };
   },
   watch: {
     isLightOn: function(value) {
       this.updateLightState(value);
       this.snackbar = true;
+    },
+    brightness: function(value) {
+      this.setLightBrightness(value);
     }
   },
   mounted() {
@@ -45,11 +50,15 @@ export default {
       axios.get(this.baseUrl).then(response => {
         this.lightName = response.data.name;
         this.isLightOn = response.data.state.on;
+        this.brightness = response.data.state.bri;
         this.ready = true;
       });
     },
     updateLightState(newState) {
       axios.put(this.baseUrl + "/state", { on: newState });
+    },
+    setLightBrightness(value) {
+      axios.put(this.baseUrl + "/state", { bri: value });
     }
   }
 };
