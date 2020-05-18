@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import Hue from '@/services/hue'
 
 export default {
   name: "LightCard",
@@ -25,7 +25,6 @@ export default {
   },
   data() {
     return {
-      baseUrl: this.$store.state.baseUrl + "/lights/" + this.lightId,
       ready: false,
       snackbar: false,
       lightName: String,
@@ -35,31 +34,26 @@ export default {
   },
   watch: {
     isLightOn: function(value) {
-      this.updateLightState(value);
+      Hue.setLightState(this.lightId, value)
       this.snackbar = true;
     },
     brightness: function(value) {
-      this.setLightBrightness(value);
+      Hue.setLightBrightness(this.lightId, value)
     }
   },
   mounted() {
     this.getLightInfo();
+    this.ready = true
   },
   methods: {
-    getLightInfo() {
-      axios.get(this.baseUrl).then(response => {
-        this.lightName = response.data.name;
-        this.isLightOn = response.data.state.on;
-        this.brightness = response.data.state.bri;
-        this.ready = true;
-      });
+    getLightInfo: async function() {
+      const lightInfo = await Hue.getLightInfo(this.lightId)
+
+      console.log(lightInfo)
+      this.lightName = lightInfo.name
+      this.isLightOn = lightInfo.on
+      this.brightness = lightInfo.brightness
     },
-    updateLightState(newState) {
-      axios.put(this.baseUrl + "/state", { on: newState });
-    },
-    setLightBrightness(value) {
-      axios.put(this.baseUrl + "/state", { bri: value });
-    }
   }
 };
 </script>
