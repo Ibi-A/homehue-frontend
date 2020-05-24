@@ -3,20 +3,21 @@
     <v-card v-if="ready" raised>
       <v-card-title>{{ lightName }}</v-card-title>
       <v-card-actions>
-        <v-slider v-model="brightness" min="1" max="254" :disabled="!isLightOn"/>
-        <v-switch v-model="isLightOn" />
+        <v-slider
+          v-model="brightness"
+          min="1"
+          max="254"
+          :disabled="!isLightOn"
+          thumb-label
+        />
+        <v-switch v-model="isLightOn" inset />
       </v-card-actions>
-
-      <v-snackbar
-        v-model="snackbar"
-        :timeout="2500"
-      >{{ lightName }} est {{ isLightOn ? 'allumé' : 'éteint' }}</v-snackbar>
     </v-card>
   </v-col>
 </template>
 
 <script>
-import Hue from '@/services/hue'
+import Hue from "@/services/hue";
 
 export default {
   name: "LightCard",
@@ -26,7 +27,6 @@ export default {
   data() {
     return {
       ready: false,
-      snackbar: false,
       lightName: String,
       isLightOn: Boolean,
       brightness: Number
@@ -34,26 +34,24 @@ export default {
   },
   watch: {
     isLightOn: function(value) {
-      Hue.setLightState(this.lightId, value)
-      this.snackbar = true;
+      Hue.setLightState(this.lightId, value);
     },
     brightness: function(value) {
-      Hue.setLightBrightness(this.lightId, value)
+      Hue.setLightBrightness(this.lightId, value);
     }
   },
   mounted() {
     this.getLightInfo();
-    this.ready = true
   },
   methods: {
     getLightInfo: async function() {
-      const lightInfo = await Hue.getLightInfo(this.lightId)
+      const lightInfo = await Hue.getLightInfo(this.lightId);
 
-      console.log(lightInfo)
-      this.lightName = lightInfo.name
-      this.isLightOn = lightInfo.on
-      this.brightness = lightInfo.brightness
-    },
+      this.lightName = lightInfo.name;
+      this.isLightOn = lightInfo.on;
+      this.brightness = lightInfo.brightness;
+      this.ready = true;
+    }
   }
 };
 </script>
